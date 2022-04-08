@@ -9,6 +9,7 @@ import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.zutjmx.cliente.jaxrs.app.models.Curso;
+import org.zutjmx.cliente.jaxrs.app.models.Instructor;
 
 import java.util.List;
 
@@ -52,7 +53,8 @@ public class Main {
         System.out.println(":: Editar ::");
         Curso cursoAEditar = cursoGuardado;
         Faker faker = new Faker();
-        String nuevaDescripcion = faker.ancient().hero();
+        //String nuevaDescripcion = faker.ancient().hero();
+        String nuevaDescripcion = faker.backToTheFuture().quote();
         if(nuevaDescripcion.length()>50) {
             cursoAEditar.setDescripcion(nuevaDescripcion.substring(0,49));
         } else {
@@ -111,12 +113,15 @@ public class Main {
             cursoACrear.setNombre(nombreCurso);
         }
 
-        String instructor = faker.book().author();
+        /*String instructor = faker.book().author();
         if(instructor.length()>50) {
             cursoACrear.setInstructor(instructor.substring(0,49));
         } else {
             cursoACrear.setInstructor(instructor);
-        }
+        }*/
+        Instructor instructor = new Instructor();
+        instructor.setId(5L);
+        cursoACrear.setInstructor(instructor);
 
         Double duracion = faker.number().randomDouble(0,20,100);
         cursoACrear.setDuracion(duracion);
